@@ -2,12 +2,14 @@ body {
     background-color: #508C9B;
     font-family: "IBM Plex Mono", monospace;
     text-align: center;
-    font-size: 32;
+    /* font-size: 32; */
     color: #d3cdcd;
 }
 
 h1 {
     margin-top: 350;
+    font-size: 32;
+
 }
 
 h2 {
@@ -16,6 +18,8 @@ h2 {
 
 a {
     color: #d3cdcd;
+    font-size: 32;
+
 
 }
 
