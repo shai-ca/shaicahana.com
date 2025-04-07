@@ -96,7 +96,7 @@ li:before {
   overflow: auto;
 }
 
-.modal img {
+.modal-video {
   margin: auto;
   display: block;
   max-width: 80%;
@@ -108,7 +108,7 @@ li:before {
   transition: transform 0.3s ease-in-out;
 }
 
-.modal.show img {
+.modal.show .modal-video {
   transform: translate(-50%, -50%) scale(1);
 }
 
@@ -133,4 +133,20 @@ li:before {
 
 .hidden {
   display: none;
+}
+
+.modal img {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal.show img {
+  transform: translate(-50%, -50%) scale(1);
 }
