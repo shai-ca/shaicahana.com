@@ -1,49 +1,87 @@
 :root {
-  --primary-color: #2c3e50;
-  --secondary-color: #3498db;
-  --background-color: #f8f9fa;
-  --text-color: #2c3e50;
-  --hover-color: #2980b9;
+  --bg: #fbfbfa;
+  --ink: #16202c;
+  --text: #40505f;
+  --muted: #7b8896;
+  --line: #e4e7ea;
+  --accent: #0f766e;
+  --accent-soft: #e6f2f0;
+  --hover-color: #0b544e;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   font-family: "IBM Plex Mono", monospace;
-  line-height: 1.6;
-  max-width: 800px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  max-width: 1060px;
   margin: 0 auto;
-  padding: 2rem;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  padding: 3rem 2rem 5rem;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--accent);
 }
 
 h1 {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  border-bottom: 3px solid var(--secondary-color);
-  padding-bottom: 0.5rem;
-  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ---------- two-column layout ----------
+   NOTE: do not add transform / filter / perspective / contain to .layout,
+   main, .timeline or .entry — those properties create a containing block
+   for position:fixed, which would trap the .modal overlays inside the
+   column instead of covering the viewport. */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 19rem;
+  gap: 4rem;
+  align-items: start;
 }
 
 h2 {
-  color: var(--primary-color);
-  margin-top: 2rem;
-  font-size: 1.8rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line);
 }
 
-h3 {
-  color: var(--secondary-color);
-  font-size: 1.3rem;
+.intro {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--ink);
+  margin: 0 0 1.25rem;
 }
 
-h4 {
-  color: var(--text-color);
-  font-style: italic;
+.contact {
+  margin: 0 0 3rem;
+  font-size: 0.88rem;
 }
 
 a {
-  color: var(--secondary-color);
+  color: var(--accent);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 a:hover {
@@ -51,38 +89,173 @@ a:hover {
   text-decoration: underline;
 }
 
-ul {
-  list-style-type: none;
-  padding-left: 0;
+/* ---------- experience timeline ---------- */
+
+.timeline {
+  padding-left: 1.75rem;
+  border-left: 2px solid var(--line);
 }
 
-li {
-  margin-bottom: 0.5rem;
-  padding-left: 1.5rem;
+.entry {
   position: relative;
+  padding-bottom: 2.75rem;
 }
 
-li:before {
-  content: "▹";
+.entry:last-child {
+  padding-bottom: 0;
+}
+
+/* marker sits on the timeline rule; transform here is safe because a
+   pseudo-element is not an ancestor of the .modal overlays */
+.entry::before {
+  content: "";
   position: absolute;
-  left: 0;
-  color: var(--secondary-color);
+  left: calc(-1.75rem - 1px);
+  top: 0.5rem;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg);
 }
 
-/* Add responsive design */
+.entry-year {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+
+.entry h3 {
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0;
+}
+
+.entry h4 {
+  font-size: 0.88rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0.15rem 0 0.85rem;
+}
+
+.entry p {
+  margin: 0 0 0.85rem;
+}
+
+.entry p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- sidebar ---------- */
+
+.sidebar {
+  position: sticky;
+  top: 3rem;
+}
+
+.pubs {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+}
+
+.pubs li {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+  padding: 0 0 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.pubs li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.pubs strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.pub-title {
+  display: block;
+  margin: 0.4rem 0 0.3rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+a.pub-title:hover {
+  color: var(--accent);
+}
+
+.pub-venue {
+  display: block;
+  font-style: italic;
+}
+
+.scholar-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--accent-soft);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.scholar-link:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .pubs li {
+    font-size: 0.86rem;
+  }
+}
+
 @media (max-width: 600px) {
   body {
-    padding: 1rem;
+    padding: 2rem 1.25rem 3rem;
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 
-  h2 {
-    font-size: 1.5rem;
+  .timeline {
+    padding-left: 1.25rem;
+  }
+
+  .entry::before {
+    left: calc(-1.25rem - 1px);
   }
 }
+
+/* ---------- media modals (driven by main.js) ---------- */
 
 .modal {
   display: none;
@@ -120,6 +293,7 @@ li:before {
   font-size: 30px;
   font-weight: bold;
   cursor: pointer;
+  z-index: 1;
 }
 
 .close-button:hover {
@@ -128,6 +302,7 @@ li:before {
 
 .modalLink {
   text-decoration: underline dotted;
+  text-underline-offset: 3px;
   cursor: pointer;
 }
 
