@@ -1,39 +1,3 @@
-// Create modal functionality
-function createModal(imageUrl, modalId) {
-  const modal = document.createElement("div");
-  modal.className = "modal";
-  modal.id = modalId;
-
-  const closeBtn = document.createElement("span");
-  closeBtn.className = "close";
-  closeBtn.innerHTML = "&times;";
-
-  const img = document.createElement("img");
-  img.className = "modal-content";
-  img.src = imageUrl;
-
-  modal.appendChild(closeBtn);
-  modal.appendChild(img);
-  document.body.appendChild(modal);
-
-  // Close modal when clicking the X
-  closeBtn.onclick = function () {
-    modal.style.display = "none";
-  };
-
-  // Close modal when clicking outside the image
-  modal.onclick = function (e) {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  };
-}
-
-// Function to show modal
-function showModal(modalId) {
-  document.getElementById(modalId).style.display = "block";
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   const modalLinks = document.querySelectorAll(".modalLink");
 
